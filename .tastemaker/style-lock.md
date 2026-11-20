@@ -58,7 +58,7 @@ Slide change plus a staggered content reveal. A scene change is allowed past 300
 
 ## Assets
 
-**None fetched, deliberately.** A strategy report's imagery is its data visualisation, which is drawn code-native as inline SVG at real scale: the concentration bar, the traffic breakdown, the retention bars with a 30% threshold line, the length cliff, the demand comparison, and the competitor outlier. Decorative photography would read as a blog post and would compete with the numbers. Icons are limited to the closing steps.
+**None fetched, deliberately.** A strategy report's imagery is its data visualisation, which is drawn code-native as inline SVG at real scale: the concentration bar, the traffic breakdown, the retention bars with a 30% threshold line, the peer winner lengths, the demand comparison, and the peer benchmark table. Decorative photography would read as a blog post and would compete with the numbers. Icons are limited to the closing steps.
 
 ## Copy rules applied
 
