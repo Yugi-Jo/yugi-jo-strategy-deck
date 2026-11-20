@@ -92,6 +92,14 @@ h2{font-family:Unbounded,sans-serif;font-weight:600;font-size:66px;line-height:1
 .col.crit .cb{background:var(--accent)}
 .col.crit .cv{color:var(--accent)}
 .col .cl{font-size:20px;opacity:.7;margin-top:var(--s4);text-align:center}
+.col .cl b{display:block;font-size:16px;font-weight:400;opacity:.72;margin-top:4px;
+  font-variant-numeric:tabular-nums}
+/* a bucket that does not survive scrutiny is ghosted; the recalculated one carries accent */
+.col.void .cb{background:var(--surface);border:1px solid var(--border);border-bottom:none}
+.col.void .cv{opacity:.4}
+.col.fix .cb{background:var(--accent)}
+.col.fix .cv{color:var(--accent)}
+.cols .sep{width:1px;flex:none;height:100%;background:var(--border)}
 
 /* length rows: duration | what it is | scale | views */
 .lrow{display:grid;grid-template-columns:126px 452px 1fr 150px;align-items:center;
@@ -298,8 +306,31 @@ const SLIDES = [
 </section>`,
 
 `<section class="slide">
-  <div class="r kicker">Finding 05 &nbsp;/&nbsp; Length, corrected</div>
+  <div class="r kicker">Finding 05a &nbsp;/&nbsp; Your retention by length</div>
   <h2 class="r">Five of the six videos over forty minutes were livestreams.</h2>
+  <div class="r cols" style="height:420px">
+    <div class="col"><div class="cv">26.4%</div><div class="cb" style="height:76%"></div>
+      <div class="cl">Under 10 min<b>12 videos</b></div></div>
+    <div class="col"><div class="cv">20.5%</div><div class="cb" style="height:59%"></div>
+      <div class="cl">10 to 20 min<b>19 videos</b></div></div>
+    <div class="col"><div class="cv">18.1%</div><div class="cb" style="height:52.1%"></div>
+      <div class="cl">20 to 40 min<b>5 videos</b></div></div>
+    <div class="col void"><div class="cv">3.2%</div><div class="cb" style="height:9.2%"></div>
+      <div class="cl">Over 40 min<b>6 videos, 5 livestreams</b></div></div>
+    <div class="sep"></div>
+    <div class="col fix"><div class="cv">19.2%</div><div class="cb" style="height:55.3%"></div>
+      <div class="cl">Over 40 min<b>recalculated, 1 video</b></div></div>
+  </div>
+  <div class="r callout">
+    <div class="big">19.2%</div>
+    <div class="t">Your one edited video over forty minutes. The bucket beside it read 3.2% because
+    five livestreams were averaged into it. Livestream retention is its own measurement.</div>
+  </div>
+</section>`,
+
+`<section class="slide">
+  <div class="r kicker">Finding 05b &nbsp;/&nbsp; Peer length</div>
+  <h2 class="r">The peer top eight has nothing under thirteen minutes.</h2>
   <div class="r chart" style="margin-top:var(--s4)">
     <div class="lrow"><div class="len">77 min</div>
       <div class="k">History of Adult Swim<span>MothiMoth &middot; 4,410 subs</span></div>
@@ -336,8 +367,8 @@ const SLIDES = [
   </div>
   <div class="r callout">
     <div class="big">18 min</div>
-    <div class="t">The median length of a peer winner. Nothing under thirteen minutes reaches their
-    top eight, and the three largest wins all run twenty-one minutes or longer.</div>
+    <div class="t">The median length of a peer winner. The three largest wins all run twenty-one
+    minutes or longer, and the biggest runs past three hours.</div>
   </div>
 </section>`,
 
