@@ -93,6 +93,17 @@ h2{font-family:Unbounded,sans-serif;font-weight:600;font-size:66px;line-height:1
 .col.crit .cv{color:var(--accent)}
 .col .cl{font-size:20px;opacity:.7;margin-top:var(--s4);text-align:center}
 
+/* length rows: duration | what it is | scale | views */
+.lrow{display:grid;grid-template-columns:126px 452px 1fr 150px;align-items:center;
+  gap:var(--s5);margin-bottom:var(--s4)}
+.lrow .len{font-family:Unbounded,sans-serif;font-weight:600;font-size:25px;
+  font-variant-numeric:tabular-nums;text-align:right;color:var(--accent)}
+.lrow .k{font-size:21px;line-height:1.25}
+.lrow .k span{display:block;font-size:17px;opacity:.55;margin-top:3px}
+.lrow .v{font-size:22px;font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
+td small{display:block;font-size:17px;opacity:.55;margin-top:3px;font-weight:400;
+  font-variant-numeric:normal}
+
 table{width:100%;border-collapse:collapse;margin-top:var(--s5)}
 th{font-size:17px;letter-spacing:.12em;text-transform:uppercase;opacity:.55;text-align:left;
   padding:0 var(--s4) var(--s3) 0;border-bottom:1px solid var(--border);font-weight:600}
@@ -163,7 +174,7 @@ const SLIDES = [
 
 `<section class="slide statement">
   <div class="r kicker">The recommendation</div>
-  <h2 class="r">Make single-show nostalgia retrospectives. Ten to twenty minutes. Packaged as an
+  <h2 class="r">Make single-show nostalgia retrospectives. Packaged as an
   old cartoon that was genuinely unhinged.</h2>
   <div class="r rule"></div>
   <div class="r lede">Every other finding here points the same way.</div>
@@ -287,22 +298,46 @@ const SLIDES = [
 </section>`,
 
 `<section class="slide">
-  <div class="r kicker">Finding 05 &nbsp;/&nbsp; Length</div>
-  <h2 class="r">Every extra ten minutes costs retention.</h2>
-  <div class="r cols">
-    <div class="col"><div class="cv">26.4%</div><div class="cb" style="height:88%"></div>
-      <div class="cl">Under 10 min</div></div>
-    <div class="col"><div class="cv">20.5%</div><div class="cb" style="height:68%"></div>
-      <div class="cl">10 to 20 min</div></div>
-    <div class="col"><div class="cv">18.1%</div><div class="cb" style="height:60%"></div>
-      <div class="cl">20 to 40 min</div></div>
-    <div class="col crit"><div class="cv">3.2%</div><div class="cb" style="height:11%"></div>
-      <div class="cl">Over 40 min</div></div>
+  <div class="r kicker">Finding 05 &nbsp;/&nbsp; Length, corrected</div>
+  <h2 class="r">Five of the six videos over forty minutes were livestreams.</h2>
+  <div class="r chart" style="margin-top:var(--s4)">
+    <div class="lrow"><div class="len">77 min</div>
+      <div class="k">History of Adult Swim<span>MothiMoth &middot; 4,410 subs</span></div>
+      <div class="track"><div class="bar"><div class="fill" style="width:100%"></div></div></div>
+      <div class="v">291,248</div></div>
+    <div class="lrow"><div class="len">21 min</div>
+      <div class="k">Rocko's Modern Life Was Crazy<span>MothiMoth &middot; 4,410 subs</span></div>
+      <div class="track"><div class="bar"><div class="fill" style="width:60.6%"></div></div></div>
+      <div class="v">176,600</div></div>
+    <div class="lrow"><div class="len">184 min</div>
+      <div class="k">The Funtastic Legacy of Hanna-Barbera<span>47Cartoonguy &middot; 10,700 subs</span></div>
+      <div class="track"><div class="bar"><div class="fill" style="width:56.6%"></div></div></div>
+      <div class="v">164,905</div></div>
+    <div class="lrow"><div class="len">16 min</div>
+      <div class="k">Who's The Dumbest Character?<span>Man Ham Productions &middot; 5,720 subs</span></div>
+      <div class="track"><div class="bar"><div class="fill" style="width:48.7%"></div></div></div>
+      <div class="v">141,980</div></div>
+    <div class="lrow"><div class="len">26 min</div>
+      <div class="k">Looney Tunes: Back in Action<span>MothiMoth &middot; 4,410 subs</span></div>
+      <div class="track"><div class="bar"><div class="fill" style="width:38.4%"></div></div></div>
+      <div class="v">111,698</div></div>
+    <div class="lrow"><div class="len">13 min</div>
+      <div class="k">Every Pokemon Theme Song Ranked<span>Man Ham Productions &middot; 5,720 subs</span></div>
+      <div class="track"><div class="bar"><div class="fill" style="width:31.8%"></div></div></div>
+      <div class="v">92,581</div></div>
+    <div class="lrow"><div class="len">18 min</div>
+      <div class="k">Which Animated Bully is the WORST?<span>Man Ham Productions &middot; 5,720 subs</span></div>
+      <div class="track"><div class="bar"><div class="fill" style="width:28.2%"></div></div></div>
+      <div class="v">82,105</div></div>
+    <div class="lrow"><div class="len">20 min</div>
+      <div class="k">Which Forgotten Shows Still Hold Up?<span>Man Ham Productions &middot; 5,720 subs</span></div>
+      <div class="track"><div class="bar"><div class="fill" style="width:22.8%"></div></div></div>
+      <div class="v">66,404</div></div>
   </div>
   <div class="r callout">
-    <div class="big">10 to 20 min</div>
-    <div class="t">20.5% retention and the highest average views on the channel, at 4,220. That is
-    the window to aim for.</div>
+    <div class="big">18 min</div>
+    <div class="t">The median length of a peer winner. Nothing under thirteen minutes reaches their
+    top eight, and the three largest wins all run twenty-one minutes or longer.</div>
   </div>
 </section>`,
 
@@ -338,26 +373,27 @@ const SLIDES = [
 </section>`,
 
 `<section class="slide">
-  <div class="r kicker">Finding 08 &nbsp;/&nbsp; The ceiling is open</div>
-  <h2 class="r">Somebody ran this format last week and took 155,475 views.</h2>
-  <div class="r chart">
-    <div class="row hot"><div class="k">ED, EDD N EDDY is UNHINGED</div>
-      <div class="track"><div class="bar"><div class="fill hot" style="width:100%"></div></div></div>
-      <div class="v">155,475</div></div>
-    <div class="row"><div class="k">Rejected Ideas of Generator Rex</div>
-      <div class="track"><div class="bar"><div class="fill" style="width:8.1%"></div></div></div>
-      <div class="v">12,591</div></div>
-    <div class="row"><div class="k">The 13 Ghosts of Scooby-Doo</div>
-      <div class="track"><div class="bar"><div class="fill" style="width:1.7%"></div></div></div>
-      <div class="v">2,670</div></div>
-    <div class="row"><div class="k">Remember Gormiti: Nature Unleashed?</div>
-      <div class="track"><div class="bar"><div class="fill" style="width:1.3%"></div></div></div>
-      <div class="v">2,001</div></div>
-  </div>
+  <div class="r kicker">Finding 08 &nbsp;/&nbsp; Peer proof at your scale</div>
+  <h2 class="r">Your best video outran all four of them.</h2>
+  <table class="r">
+    <tr><th>Channel</th><th>Subs</th><th>Typical video</th><th>Best result</th><th>Multiple</th></tr>
+    <tr><td class="k">Pop Culture Pedestal</td><td>4,700</td><td>338</td>
+      <td>39,750<small>Ruby Spears Superman</small></td><td class="win">117.6x</td></tr>
+    <tr><td class="k">MothiMoth</td><td>4,410</td><td>9,895</td>
+      <td>291,248<small>History of Adult Swim</small></td><td class="win">29.4x</td></tr>
+    <tr><td class="k">Man Ham Productions</td><td>5,720</td><td>4,847</td>
+      <td>141,980<small>Who's The Dumbest Character?</small></td><td class="win">29.3x</td></tr>
+    <tr><td class="k">47Cartoonguy</td><td>10,700</td><td>2,424</td>
+      <td>164,905<small>Funtastic Legacy of Hanna-Barbera</small></td><td class="win">68.0x</td></tr>
+    <tr class="hi"><td class="k">Yugi Jo</td><td>1,570</td><td>530</td>
+      <td>62,889<small>Sonic Underground ending</small></td><td class="win">118.7x</td></tr>
+  </table>
+  <div class="r small" style="margin-top:var(--s5)">The 155,475 figure this slide used to lead with
+  came from a channel with 893,000 subscribers, where it was a routine result.</div>
   <div class="r callout">
-    <div class="big">13 days</div>
-    <div class="t">One show, one strong opinion in the title, in the lane you already work in.
-    The format is not saturated.</div>
+    <div class="big">118.7x</div>
+    <div class="t">Your Sonic Underground video, measured against your own 530-view median. It
+    outran every peer here. The difference is that they land a second one.</div>
   </div>
 </section>`,
 
@@ -374,7 +410,7 @@ const SLIDES = [
           <span>Not the theme. The show.</span></li>
         <li><b>The decade in the description and tags</b>
           <span>That is the modifier people actually type</span></li>
-        <li><b>Ten to twenty minutes</b><span>Or under ten if the show is thin</span></li>
+        <li><b>Fifteen to twenty-five minutes</b><span>Aim at the peer median, eighteen</span></li>
         <li><b>Written for the US audience</b><span>98.8% of the people watching</span></li>
       </ul>
     </div>
@@ -383,7 +419,7 @@ const SLIDES = [
       <ul>
         <li><b>Livestreams</b><span>2.1% retention across four</span></li>
         <li><b>"Ending explained" videos</b><span>Dominated by mass-produced channels in other languages</span></li>
-        <li><b>Anything over twenty minutes</b><span>Until retention holds above 25% at that length</span></li>
+        <li><b>Picking a show for obscurity alone</b><span>A forgotten-cartoon retrospective on a 368-sub channel got 79 views</span></li>
         <li><b>"Why X" essays</b><span>People click the premise and leave</span></li>
       </ul>
     </div>
