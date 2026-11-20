@@ -116,6 +116,19 @@ tr.hi td{background:var(--surface)}
 td small{display:block;font-size:17px;opacity:.55;margin-top:3px;font-weight:400;
   font-variant-numeric:normal}
 
+/* ranked split list: shows a bimodal category as one descending run with a break in it */
+.arow{display:grid;grid-template-columns:110px 1fr 118px;align-items:center;
+  gap:var(--s5);padding:7px 0}
+.arow .p{font-family:Unbounded,sans-serif;font-weight:600;font-size:22px;
+  font-variant-numeric:tabular-nums;text-align:right;color:var(--accent)}
+.arow.dim .p{color:var(--text);opacity:.45;font-weight:400}
+.arow .t{font-size:21px;line-height:1.2}
+.arow .m{font-size:19px;text-align:right;opacity:.68;font-variant-numeric:tabular-nums}
+.agap{display:flex;align-items:center;gap:var(--s4);margin:10px 0}
+.agap hr{flex:1;border:none;border-top:1px solid var(--accent);margin:0}
+.agap em{font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+  font-style:normal;white-space:nowrap}
+
 .callout{margin-top:auto;background:var(--surface);border-left:3px solid var(--accent);
   padding:var(--s6);display:flex;gap:var(--s6);align-items:center;border-radius:0 var(--r) var(--r) 0}
 .callout .big{font-family:Unbounded,sans-serif;font-weight:800;font-size:42px;line-height:1.05;
@@ -300,14 +313,52 @@ const SLIDES = [
       <div class="v">18.9%</div></div>
   </div>
   <div class="r callout">
-    <div class="big">8,833</div>
-    <div class="t">Average views on a nostalgia retrospective, against 880 for anime analysis.
-    Twelve of the thirty-two videos are anime analysis.</div>
+    <div class="big">30.5%</div>
+    <div class="t">Nerd culture crossover retention, the only category that clears 30% and the only
+    one that separates from the pack on a test. The rest, anime included, sit level with each
+    other.</div>
   </div>
 </section>`,
 
 `<section class="slide">
-  <div class="r kicker">Finding 05 &nbsp;/&nbsp; Length at home</div>
+  <div class="r kicker">Finding 05 &nbsp;/&nbsp; Inside one category</div>
+  <h2 class="r">Anime is not a weak category.</h2>
+  <div class="r chart" style="margin-top:var(--s4)">
+    <div class="arow"><div class="p">2,118</div>
+      <div class="t">The Dungeon Crawler Carl TV show</div><div class="m">2.9x</div></div>
+    <div class="arow"><div class="p">2,006</div>
+      <div class="t">The Rise and Fall of Power Rangers Anime</div><div class="m">2.7x</div></div>
+    <div class="arow"><div class="p">1,951</div>
+      <div class="t">The DEATH of Gon Freecss!</div><div class="m">2.7x</div></div>
+    <div class="arow"><div class="p">1,499</div>
+      <div class="t">Why This Anime Is the Story of YOUR Life!</div><div class="m">2.0x</div></div>
+    <div class="arow"><div class="p">757</div>
+      <div class="t">This Bakugan Plot Twist Is INSANE!</div><div class="m">1.0x</div></div>
+    <div class="agap"><hr><em>your median, 734</em><hr></div>
+    <div class="arow dim"><div class="p">710</div>
+      <div class="t">Live Action One Piece Did This Better</div><div class="m">1.0x</div></div>
+    <div class="arow dim"><div class="p">474</div>
+      <div class="t">Every FromSoft Game Is In The Same Universe</div><div class="m">0.6x</div></div>
+    <div class="arow dim"><div class="p">326</div>
+      <div class="t">Revisiting Fairy Tail, The Beginning</div><div class="m">0.4x</div></div>
+    <div class="arow dim"><div class="p">239</div>
+      <div class="t">Toonami Almost Saved These 5 Shows!</div><div class="m">0.3x</div></div>
+    <div class="arow dim"><div class="p">223</div>
+      <div class="t">Fairy Tail's First Mission Was Hiding Something</div><div class="m">0.3x</div></div>
+    <div class="arow dim"><div class="p">173</div>
+      <div class="t">Reborn as a Vending Machine</div><div class="m">0.2x</div></div>
+    <div class="arow dim"><div class="p">85</div>
+      <div class="t">Baited Into a Trashy Romance Anime</div><div class="m">0.1x</div></div>
+  </div>
+  <div class="r callout">
+    <div class="big">5 of 12</div>
+    <div class="t">clear your 734 median, running 757 to 2,118. The other seven run 85 to 710.
+    Against everything else on the channel, anime is not distinguishable.</div>
+  </div>
+</section>`,
+
+`<section class="slide">
+  <div class="r kicker">Finding 06 &nbsp;/&nbsp; Length at home</div>
   <h2 class="r">Retention levels off after ten minutes.</h2>
   <div class="r cols" style="height:420px">
     <div class="col"><div class="cv">27.5%</div><div class="cb" style="height:76%"></div>
@@ -327,7 +378,7 @@ const SLIDES = [
 </section>`,
 
 `<section class="slide">
-  <div class="r kicker">Finding 06 &nbsp;/&nbsp; Length across the peer set</div>
+  <div class="r kicker">Finding 07 &nbsp;/&nbsp; Length across the peer set</div>
   <h2 class="r">The peer top eight has nothing under thirteen minutes.</h2>
   <div class="r chart" style="margin-top:var(--s4)">
     <div class="lrow"><div class="len">77 min</div>
@@ -371,7 +422,7 @@ const SLIDES = [
 </section>`,
 
 `<section class="slide">
-  <div class="r kicker">Finding 07 &nbsp;/&nbsp; Search demand</div>
+  <div class="r kicker">Finding 08 &nbsp;/&nbsp; Search demand</div>
   <h2 class="r">The middle video gets 734 views. This lane gets 4,285 searches a month.</h2>
   <div class="r chart" style="margin-top:var(--s4);flex:none">
     <div class="row"><div class="k">Your median video</div>
@@ -393,7 +444,7 @@ const SLIDES = [
 </section>`,
 
 `<section class="slide statement">
-  <div class="r kicker">Finding 08 &nbsp;/&nbsp; The surprise</div>
+  <div class="r kicker">Finding 09 &nbsp;/&nbsp; The surprise</div>
   <h2 class="r">Search volume for Sonic Underground's ending is zero.</h2>
   <div class="r rule"></div>
   <div class="r lede">That video did 62,889 views anyway. YouTube recommended it because the premise
@@ -402,7 +453,7 @@ const SLIDES = [
 </section>`,
 
 `<section class="slide">
-  <div class="r kicker">Finding 09 &nbsp;/&nbsp; Peer proof at your scale</div>
+  <div class="r kicker">Finding 10 &nbsp;/&nbsp; Peer proof at your scale</div>
   <h2 class="r">Your best video outran three of the four.</h2>
   <table class="r">
     <tr><th>Channel</th><th>Subs</th><th>Typical video</th><th>Best result</th><th>Multiple</th></tr>
