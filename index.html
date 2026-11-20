@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Yugi Jo — Strategy Report</title>
+<style>
+:root{
+  --ink:#0b0c0e;
+  --paper:#f4f1ea;
+  --muted:#6f6a60;
+  --line:#d8d2c6;
+  --accent:#d4441f;
+  --accent-soft:#f0d6cc;
+  --good:#1f6f4a;
+  --gold:#b8891f;
+  --slide-w:1920px;
+  --slide-h:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#16161a;overflow:hidden;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+
+#stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+
+.slide{
+  width:var(--slide-w);height:var(--slide-h);
+  background:var(--paper);color:var(--ink);
+  position:absolute;top:50%;left:50%;
+  transform-origin:center center;
+  padding:110px 130px;
+  display:none;
+  flex-direction:column;
+}
+.slide.active{display:flex}
+
+/* ---------- shared type ---------- */
+.kicker{font-size:22px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin-bottom:34px}
+h1{font-size:104px;line-height:1.02;letter-spacing:-.03em;font-weight:800}
+h2{font-size:74px;line-height:1.06;letter-spacing:-.025em;font-weight:800}
+h3{font-size:34px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
+.lede{font-size:34px;line-height:1.45;color:#2a2925;font-weight:400;max-width:1200px}
+.small{font-size:24px;line-height:1.5;color:var(--muted)}
+.foot{position:absolute;bottom:52px;left:130px;right:130px;
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:20px;color:var(--muted);letter-spacing:.06em}
+.foot .num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink)}
+.rule{height:2px;background:var(--line);margin:44px 0}
+
+/* ---------- cover ---------- */
+.cover{justify-content:center;background:var(--ink);color:var(--paper)}
+.cover .kicker{color:var(--accent)}
+.cover h1{font-size:150px;color:var(--paper)}
+.cover .sub{margin-top:40px;font-size:38px;color:#9d978b;max-width:1150px;line-height:1.35}
+.cover .meta{margin-top:78px;display:flex;gap:70px}
+.cover .meta div{border-left:3px solid var(--accent);padding-left:22px}
+.cover .meta .n{font-size:46px;font-weight:800;color:var(--paper);line-height:1}
+.cover .meta .l{font-size:19px;color:#8d8779;letter-spacing:.13em;text-transform:uppercase;margin-top:10px}
+
+/* ---------- poster statement ---------- */
+.poster{align-items:flex-start;justify-content:center;background:var(--ink);color:var(--paper)}
+.poster h2{font-size:98px;color:var(--paper);max-width:1500px}
+.poster .accentbar{width:150px;height:10px;background:var(--accent);margin-top:52px}
+.poster .note{margin-top:46px;font-size:30px;color:#9d978b;max-width:1150px;line-height:1.45}
+
+/* ---------- data helpers ---------- */
+.statrow{display:flex;gap:0;margin-top:20px;border-top:2px solid var(--line)}
+.stat{flex:1;padding:44px 34px 0 0;border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat .v{font-size:88px;font-weight:800;line-height:1;letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums}
+.stat .v.warn{color:var(--accent)}
+.stat .v.good{color:var(--good)}
+.stat .l{font-size:22px;color:var(--muted);margin-top:18px;line-height:1.35;max-width:300px}
+
+/* ---------- bar chart ---------- */
+.bars{margin-top:30px;display:flex;flex-direction:column;gap:26px}
+.bar{display:grid;grid-template-columns:430px 1fr 190px;align-items:center;gap:26px}
+.bar .name{font-size:30px;font-weight:600;text-align:right;color:#2a2925}
+.bar .track{height:52px;background:#e6e0d4;position:relative;border-radius:2px;overflow:hidden}
+.bar .fill{height:100%;position:relative}
+.bar .val{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums}
+.bar.hero .name{color:var(--accent)}
+.bar.hero .val{color:var(--accent)}
+
+/* ---------- keyword table ---------- */
+table{width:100%;border-collapse:collapse;margin-top:26px}
+th{font-size:20px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+  text-align:left;padding:0 20px 14px 0;border-bottom:2px solid var(--ink);
+  font-weight:700}
+td{font-size:26px;padding:16px 20px 16px 0;border-bottom:1px solid var(--line);
+  font-variant-numeric:tabular-nums}
+/* dense: a table slide with a callout needs tighter vertical rhythm so the
+   callout never collides with the footer */
+.dense table{margin-top:18px}
+.dense td{padding:13px 20px 13px 0}
+.dense .callout{padding:30px 46px;margin-top:auto}
+.dense h2{font-size:62px}
+td.k{font-weight:600;font-variant-numeric:normal}
+td.win{color:var(--good);font-weight:800}
+td.bad{color:var(--accent);font-weight:800}
+tr.hi td{background:var(--accent-soft)}
+tr.hi td.k{color:var(--accent)}
+
+/* ---------- two column ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:70px;margin-top:16px}
+/* fill: columns stretch to the available slide height so short lists don't leave
+   a dead band above the footer */
+.split.fill{flex:1;align-items:stretch;margin-top:30px}
+.panel{display:flex;flex-direction:column;padding-top:26px;border-top:3px solid var(--ink)}
+/* the rule line sits at the top; the list grows from there so the column uses
+   its full height instead of leaving a dead band */
+.panel ul{flex:1;display:flex;flex-direction:column;justify-content:flex-start;gap:6px}
+.panel.no{border-top-color:var(--accent)}
+.panel.yes{border-top-color:var(--good)}
+.panel .tag{font-size:22px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:800;color:var(--muted);margin-bottom:22px}
+.panel.yes .tag{color:var(--good)}
+.panel.no .tag{color:var(--accent)}
+.panel ul{list-style:none}
+.panel li{font-size:28px;line-height:1.4;padding:0 0 22px 0;color:#2a2925}
+.panel li b{font-weight:800}
+
+/* ---------- callout ---------- */
+.callout{margin-top:auto;background:var(--ink);color:var(--paper);
+  padding:44px 52px;display:flex;align-items:center;gap:44px}
+.callout .big{font-size:60px;font-weight:800;line-height:1;color:var(--accent);
+  letter-spacing:-.03em;white-space:nowrap}
+.callout .txt{font-size:30px;line-height:1.4;color:#ded8cc}
+
+/* ---------- progress ---------- */
+#progress{position:fixed;left:0;bottom:0;height:4px;background:var(--accent);
+  z-index:100;transition:width .25s ease}
+#hint{position:fixed;right:22px;bottom:16px;color:#6a6a72;font-size:14px;
+  letter-spacing:.1em;z-index:100;font-family:ui-monospace,monospace}
+
+/* ---------- print ---------- */
+@media print{
+  html,body{overflow:visible;background:#fff;height:auto}
+  #stage{position:static;display:block}
+  .slide{display:flex!important;position:relative;top:auto;left:auto;
+    transform:none!important;page-break-after:always;margin:0}
+  #progress,#hint{display:none}
+}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div id="progress"></div>
+<div id="hint">← → / SPACE</div>
+
+<script>
+const SLIDES = [
+
+/* 1 — COVER */
+`<section class="slide cover">
+  <div class="kicker">Channel Strategy Report &nbsp;·&nbsp; 20 Nov 2026</div>
+  <h1>Yugi Jo</h1>
+  <div class="sub">Deep analysis of 38 long-form videos, live audience data, and low-competition
+  search demand — and what to do with all of it.</div>
+  <div class="meta">
+    <div><div class="n">1,570</div><div class="l">Subscribers</div></div>
+    <div><div class="n">113,335</div><div class="l">Lifetime views</div></div>
+    <div><div class="n">56%</div><div class="l">Traffic from search</div></div>
+    <div><div class="n">35</div><div class="l">Credits spent</div></div>
+  </div>
+</section>`,
+
+/* 2 — THE ONE-LINE ANSWER */
+`<section class="slide poster">
+  <div class="kicker">The recommendation, in one line</div>
+  <h2>Make single-show nostalgia retrospectives. 10–20 minutes. Packaged as
+  &ldquo;this old cartoon was insane.&rdquo;</h2>
+  <div class="accentbar"></div>
+  <div class="note">Nothing else in the data comes close. Here's the evidence.</div>
+</section>`,
+
+/* 3 — THE CHANNEL IS ONE HIT */
+`<section class="slide">
+  <div class="kicker">Finding 01 — The shape of the channel</div>
+  <h2>One video is carrying everything.</h2>
+  <div class="statrow">
+    <div class="stat"><div class="v warn">60%</div><div class="l">of all long-form views come from a single video</div></div>
+    <div class="stat"><div class="v">530</div><div class="l">views — the middle video</div></div>
+    <div class="stat"><div class="v">2,765</div><div class="l">views — the average</div></div>
+    <div class="stat"><div class="v warn">14</div><div class="l">of 38 videos sit under 300 views</div></div>
+  </div>
+  <div class="callout">
+    <div class="big">456 &lt; 691</div>
+    <div class="txt">Median views <em>after</em> the Sonic video are lower than before it. The hit
+    didn't lift the floor — it was a spike.</div>
+  </div>
+</section>`,
+
+/* 4 — SEARCH DRIVEN */
+`<section class="slide">
+  <div class="kicker">Finding 02 — How people find the channel</div>
+  <h2>56% of traffic is search. Not browse. Not suggested.</h2>
+  <div class="bars">
+    <div class="bar hero"><div class="name">YouTube search</div>
+      <div class="track"><div class="fill" style="width:56%;background:var(--accent)"></div></div>
+      <div class="val">56.0%</div></div>
+    <div class="bar"><div class="name">Subscribers</div>
+      <div class="track"><div class="fill" style="width:31.9%;background:#4a4740"></div></div>
+      <div class="val">31.9%</div></div>
+    <div class="bar"><div class="name">External</div>
+      <div class="track"><div class="fill" style="width:4.6%;background:#a9a297"></div></div>
+      <div class="val">4.6%</div></div>
+    <div class="bar"><div class="name">Channel page</div>
+      <div class="track"><div class="fill" style="width:3.4%;background:#a9a297"></div></div>
+      <div class="val">3.4%</div></div>
+    <div class="bar"><div class="name">Related video</div>
+      <div class="track"><div class="fill" style="width:3.1%;background:#a9a297"></div></div>
+      <div class="val">3.1%</div></div>
+  </div>
+  <div class="callout">
+    <div class="big">Titles are distribution.</div>
+    <div class="txt">If a title doesn't match words a human types into YouTube, the video
+    doesn't exist.</div>
+  </div>
+</section>`,
+
+/* 5 — WHO WATCHES */
+`<section class="slide">
+  <div class="kicker">Finding 03 — Who is actually watching</div>
+  <h2>A UK creator with a 98.8% American audience.</h2>
+  <div class="split">
+    <div class="panel">
+      <div class="tag">Geography</div>
+      <table>
+        <tr><td class="k" style="font-size:34px">United States</td><td class="win" style="font-size:34px">3,375</td></tr>
+        <tr><td class="k" style="font-size:34px">United Kingdom</td><td style="font-size:34px">42</td></tr>
+        <tr><td class="k" style="font-size:34px">Canada</td><td style="font-size:34px">37</td></tr>
+      </table>
+    </div>
+    <div class="panel" style="border-top-color:var(--gold)">
+      <div class="tag" style="color:var(--gold)">Audience</div>
+      <table>
+        <tr><td class="k" style="font-size:34px">Age</td><td style="font-size:34px">25–34</td></tr>
+        <tr><td class="k" style="font-size:34px">Gender</td><td style="font-size:34px">Male, 100% identified</td></tr>
+        <tr><td class="k" style="font-size:34px">Devices</td><td style="font-size:34px">Mobile-first, TV second</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="callout">
+    <div class="big">Write for the US.</div>
+    <div class="txt">A British nostalgia angle is aimed at 1.2% of the people watching. TV viewers
+    also watch noticeably longer per view than mobile.</div>
+  </div>
+</section>`,
+
+/* 6 — RETENTION BY CATEGORY */
+`<section class="slide">
+  <div class="kicker">Finding 04 — What actually holds viewers</div>
+  <h2>Only two categories clear 30% retention.</h2>
+  <div class="bars">
+    <div class="bar hero"><div class="name">Nerd culture crossover</div>
+      <div class="track"><div class="fill" style="width:30.5%;background:var(--accent)"></div></div>
+      <div class="val">30.5%</div></div>
+    <div class="bar hero"><div class="name">Nostalgia retrospective</div>
+      <div class="track"><div class="fill" style="width:27.6%;background:var(--accent)"></div></div>
+      <div class="val">27.6%</div></div>
+    <div class="bar"><div class="name">Industry commentary</div>
+      <div class="track"><div class="fill" style="width:24.1%;background:#4a4740"></div></div>
+      <div class="val">24.1%</div></div>
+    <div class="bar"><div class="name">Anime analysis</div>
+      <div class="track"><div class="fill" style="width:20.6%;background:#4a4740"></div></div>
+      <div class="val">20.6%</div></div>
+    <div class="bar"><div class="name">Pop culture commentary</div>
+      <div class="track"><div class="fill" style="width:16.5%;background:#8d8779"></div></div>
+      <div class="val">16.5%</div></div>
+    <div class="bar"><div class="name">Livestream</div>
+      <div class="track"><div class="fill" style="width:2.1%;background:#8d8779"></div></div>
+      <div class="val">2.1%</div></div>
+  </div>
+  <div class="foot"><span>Retention = averageViewPercentage, YouTube Analytics API</span><span class="num">06</span></div>
+</section>`,
+
+/* 7 — LENGTH KILLS */
+`<section class="slide">
+  <div class="kicker">Finding 05 — Length works against this channel</div>
+  <h2>Longer is worse. Every single time.</h2>
+  <div class="split" style="margin-top:50px">
+    <div class="panel yes">
+      <div class="tag">Under 10 minutes</div>
+      <div style="font-size:130px;font-weight:800;line-height:1;color:var(--good)">26.4%</div>
+      <div class="small" style="margin-top:16px;font-size:26px">1,009 average views</div>
+    </div>
+    <div class="panel no">
+      <div class="tag">Over 40 minutes</div>
+      <div style="font-size:130px;font-weight:800;line-height:1;color:var(--accent)">3.2%</div>
+      <div class="small" style="margin-top:16px;font-size:26px">The 44-minute card video held 19.2%</div>
+    </div>
+  </div>
+  <div class="callout">
+    <div class="big">10–20 min</div>
+    <div class="txt">The 20.5% retention band with the highest average views — 4,220 per video.
+    That's the target window.</div>
+  </div>
+</section>`,
+
+/* 8 — KEYWORD DATA */
+`<section class="slide dense">
+  <div class="kicker">Finding 06 — What the keyword research bought</div>
+  <h2>Your middle video gets 530 views. This lane gets 4,285 searches.</h2>
+  <table>
+    <tr><th>Keyword</th><th>Monthly searches</th><th>Competition</th><th>Verdict</th></tr>
+    <tr class="hi"><td class="k">forgotten cartoons</td><td class="win">4,285</td><td class="win">29</td><td class="win">Best found</td></tr>
+    <tr><td class="k">nostalgic cartoons</td><td>3,403</td><td>36</td><td>Same lane</td></tr>
+    <tr><td class="k">saturday morning cartoons</td><td>35,034</td><td>51</td><td>Bigger, harder</td></tr>
+    <tr><td class="k">old cartoons</td><td>58,144</td><td>52</td><td>Biggest lane</td></tr>
+    <tr><td class="k">hanna barbera cartoons</td><td>15,466</td><td>36</td><td class="bad">Demand −35.9%</td></tr>
+    <tr><td class="k">cartoon ending explained</td><td>6,495</td><td>41</td><td class="bad">Trap</td></tr>
+  </table>
+  <div class="callout" style="margin-top:34px">
+    <div class="big">8× your median</div>
+    <div class="txt">Lowest competition of anything measured. A good bet — not a jackpot.</div>
+  </div>
+</section>`,
+
+/* 9 — SONIC SURPRISE */
+`<section class="slide poster">
+  <div class="kicker">Finding 07 — The one that changes everything</div>
+  <h2>&ldquo;Sonic underground ending&rdquo; has a search volume of <span style="color:var(--accent)">zero.</span></h2>
+  <div class="accentbar"></div>
+  <div class="note">That 62,889-view video was never found by search. YouTube <em>recommended</em> it,
+  because the premise and thumbnail made people click.<br><br>
+  So Sonic wasn't a keyword win. It was a <strong style="color:var(--paper)">packaging win</strong>
+  — and packaging is something you can deliberately do again.</div>
+</section>`,
+
+/* 10 — COMPETITOR PROOF */
+`<section class="slide dense">
+  <div class="kicker">Finding 08 — Proof the ceiling is open</div>
+  <h2>Someone did your format last week. It did 155,000 views.</h2>
+  <table>
+    <tr><th>Video</th><th>Channel</th><th>Views</th><th>Views / hour</th></tr>
+    <tr class="hi"><td class="k">ED, EDD N EDDY is UNHINGED</td><td>Sorta Stupid</td><td class="win">155,475</td><td class="win">497.9</td></tr>
+    <tr><td class="k">Rejected Ideas of Generator Rex</td><td>Santi Barrios</td><td>12,591</td><td>68.1</td></tr>
+    <tr><td class="k">The 13 Ghosts of Scooby-Doo</td><td>47Cartoonguy</td><td>2,670</td><td>23.8</td></tr>
+    <tr><td class="k">Remember Gormiti: Nature Unleashed?</td><td>digits</td><td>2,001</td><td>17.1</td></tr>
+  </table>
+  <div class="callout" style="margin-top:34px">
+    <div class="big">13 days.</div>
+    <div class="txt">Single-show nostalgia retrospective, strong opinion in the title. Your exact
+    format, in your exact lane, working right now.</div>
+  </div>
+</section>`,
+
+/* 11 — DO / DON'T */
+`<section class="slide">
+  <div class="kicker">The plan</div>
+  <h2>Start this. Stop that.</h2>
+  <div class="split fill">
+    <div class="panel yes">
+      <div class="tag">Start doing</div>
+      <ul>
+        <li><b>Single-show retrospectives</b> on genuinely unclaimed 90s / 00s cartoons</li>
+        <li><b>Show name first</b> in the title, then a verdict</li>
+        <li><b>Decade in the description and tags</b> — that's what people type</li>
+        <li><b>10–20 minutes</b>, or under 10 if the show is thin</li>
+        <li><b>Write for the US audience</b></li>
+      </ul>
+    </div>
+    <div class="panel no">
+      <div class="tag">Stop doing</div>
+      <ul>
+        <li><b>Livestreams</b> — 2.1% retention, 121 views across four</li>
+        <li><b>&ldquo;Ending explained&rdquo;</b> — dominated by mass-produced non-English channels</li>
+        <li><b>Anything over 20 minutes</b> until retention holds above 25%</li>
+        <li><b>&ldquo;Why X&rdquo; essays</b> — people click the premise, then leave</li>
+      </ul>
+    </div>
+  </div>
+</section>`,
+
+/* 12 — CLOSING */
+`<section class="slide poster">
+  <div class="kicker">Where this lands</div>
+  <h2>An 8× opportunity, on purpose, repeatedly — instead of a Sonic once, by accident.</h2>
+  <div class="accentbar"></div>
+  <div class="note">Not a lottery ticket. The difference between 530 views and roughly 4,000,
+  every time, in a lane with the lowest competition measured.</div>
+  <div style="margin-top:80px;display:flex;gap:70px">
+    <div><div style="font-size:46px;font-weight:800;color:var(--paper)">Step 1</div>
+      <div class="small" style="color:#8d8779;font-size:24px;margin-top:8px;max-width:340px">Pick a specific unclaimed cartoon with a real angle</div></div>
+    <div><div style="font-size:46px;font-weight:800;color:var(--paper)">Step 2</div>
+      <div class="small" style="color:#8d8779;font-size:24px;margin-top:8px;max-width:340px">Check it isn't a repeat, and verify search presence</div></div>
+    <div><div style="font-size:46px;font-weight:800;color:var(--paper)">Step 3</div>
+      <div class="small" style="color:#8d8779;font-size:24px;margin-top:8px;max-width:340px">Write it to the voice rules and package it hard</div></div>
+  </div>
+</section>`
+];
+
+/* ---------- build ---------- */
+const stage = document.getElementById('stage');
+SLIDES.forEach((html,i)=>{
+  const wrap=document.createElement('div');
+  wrap.innerHTML=html.trim();
+  const el=wrap.firstElementChild;
+  el.dataset.index=i;
+  if(!el.querySelector('.foot')){
+    const f=document.createElement('div');
+    f.className='foot';
+    f.innerHTML='<span>Yugi Jo — Strategy Report, 20 Nov 2026</span>'+
+                '<span class="num">'+String(i+1).padStart(2,'0')+' / '+String(SLIDES.length).padStart(2,'0')+'</span>';
+    el.appendChild(f);
+  }
+  stage.appendChild(el);
+});
+const els=[...stage.querySelectorAll('.slide')];
+
+let cur = Math.min(parseInt(localStorage.getItem('yjslide')||'0',10)||0, els.length-1);
+function show(i){
+  cur=Math.max(0,Math.min(els.length-1,i));
+  els.forEach((e,n)=>e.classList.toggle('active',n===cur));
+  localStorage.setItem('yjslide',cur);
+  document.getElementById('progress').style.width=((cur+1)/els.length*100)+'%';
+}
+function fit(){
+  const s=Math.min(innerWidth/1920, innerHeight/1080);
+  els.forEach(e=>e.style.transform='translate(-50%,-50%) scale('+s+')');
+}
+addEventListener('resize',fit);
+addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown','Enter'].includes(e.key)){e.preventDefault();show(cur+1);}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(cur-1);}
+  if(e.key==='Home')show(0);
+  if(e.key==='End')show(els.length-1);
+});
+addEventListener('click',e=>{ show(e.clientX < innerWidth*0.25 ? cur-1 : cur+1); });
+fit();show(cur);
+</script>
+</body>
+</html>
