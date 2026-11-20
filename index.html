@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yugi Jo: Channel Strategy Report</title>
-<meta name="description" content="What 38 long-form videos, live audience data and low-competition search demand say to film next.">
+<meta name="description" content="What 37 long-form videos, live audience data and low-competition search demand say to film next. Livestreams and Shorts excluded.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Albert+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -94,12 +94,6 @@ h2{font-family:Unbounded,sans-serif;font-weight:600;font-size:66px;line-height:1
 .col .cl{font-size:20px;opacity:.7;margin-top:var(--s4);text-align:center}
 .col .cl b{display:block;font-size:16px;font-weight:400;opacity:.72;margin-top:4px;
   font-variant-numeric:tabular-nums}
-/* a bucket that does not survive scrutiny is ghosted; the recalculated one carries accent */
-.col.void .cb{background:var(--surface);border:1px solid var(--border);border-bottom:none}
-.col.void .cv{opacity:.4}
-.col.fix .cb{background:var(--accent)}
-.col.fix .cv{color:var(--accent)}
-.cols .sep{width:1px;flex:none;height:100%;background:var(--border)}
 
 /* length rows: duration | what it is | scale | views */
 .lrow{display:grid;grid-template-columns:126px 452px 1fr 150px;align-items:center;
@@ -170,12 +164,12 @@ const SLIDES = [
 `<section class="slide cover">
   <div class="r kicker">Channel strategy report &nbsp;/&nbsp; 20 November 2026</div>
   <h1 class="r">Yugi Jo</h1>
-  <div class="r lede">What 38 long-form videos, the live audience data, and low-competition search
-  demand say to film next.</div>
+  <div class="r lede">What 37 long-form videos, the live audience data, and low-competition search
+  demand say to film next. Livestreams and Shorts are excluded from every figure here.</div>
   <div class="r strip">
     <div><div class="v">1,570</div><div class="l">Subscribers</div></div>
-    <div><div class="v">113,335</div><div class="l">Lifetime views</div></div>
-    <div><div class="v">530</div><div class="l">Median views</div></div>
+    <div><div class="v">110,360</div><div class="l">Views on long-form</div></div>
+    <div><div class="v">710</div><div class="l">Median views</div></div>
     <div><div class="v">56%</div><div class="l">Traffic from search</div></div>
   </div>
 </section>`,
@@ -204,15 +198,15 @@ const SLIDES = [
     <div class="row"><div class="k">BEN 10 Is A Kamen Rider!</div>
       <div class="track"><div class="bar"><div class="fill" style="width:5.5%"></div></div></div>
       <div class="v">3,452</div></div>
+    <div class="row"><div class="k">Zombie World LOCKDOWN (2024)</div>
+      <div class="track"><div class="bar"><div class="fill" style="width:4.8%"></div></div></div>
+      <div class="v">3,045</div></div>
     <div class="row"><div class="k">Dungeon Crawler Carl TV show</div>
       <div class="track"><div class="bar"><div class="fill" style="width:3.4%"></div></div></div>
       <div class="v">2,118</div></div>
-    <div class="row"><div class="k">The Forgotten Power Rangers</div>
-      <div class="track"><div class="bar"><div class="fill" style="width:3.2%"></div></div></div>
-      <div class="v">2,017</div></div>
   </div>
   <div class="r callout">
-    <div class="big">456 &lt; 691</div>
+    <div class="big">648 &lt; 691</div>
     <div class="t">Median views after Sonic against median views before it. The spike bought
     subscribers. It did not lift the floor.</div>
   </div>
@@ -277,7 +271,7 @@ const SLIDES = [
 
 `<section class="slide">
   <div class="r kicker">Finding 04 &nbsp;/&nbsp; What holds a viewer</div>
-  <h2 class="r">Two categories clear 30% watch-through. Everything else sits below.</h2>
+  <h2 class="r">One category clears 30% watch-through. Everything else sits below.</h2>
   <div class="r chart">
     <div class="row"><div class="k">Nerd culture crossover</div>
       <div class="track"><div class="bar"><div class="fill hot" style="width:76.2%"></div>
@@ -293,21 +287,19 @@ const SLIDES = [
       <div class="track"><div class="bar"><div class="fill" style="width:51.5%"></div></div></div>
       <div class="v">20.6%</div></div>
     <div class="row"><div class="k">Pop culture commentary</div>
-      <div class="track"><div class="bar"><div class="fill" style="width:41.2%"></div></div></div>
-      <div class="v">16.5%</div></div>
-    <div class="row"><div class="k">Livestream</div>
-      <div class="track"><div class="bar"><div class="fill" style="width:5.2%"></div></div></div>
-      <div class="v">2.1%</div></div>
+      <div class="track"><div class="bar"><div class="fill" style="width:43.3%"></div></div></div>
+      <div class="v">17.3%</div></div>
   </div>
   <div class="r callout">
-    <div class="big">2.1%</div>
-    <div class="t">Livestreams hold one viewer in fifty. Four of them earned 121 views between them.</div>
+    <div class="big">8,833</div>
+    <div class="t">Average views on a nostalgia retrospective, against 880 for anime analysis.
+    Twelve of the thirty-seven videos are anime analysis.</div>
   </div>
 </section>`,
 
 `<section class="slide">
   <div class="r kicker">Finding 05a &nbsp;/&nbsp; Your retention by length</div>
-  <h2 class="r">Five of the six videos over forty minutes were livestreams.</h2>
+  <h2 class="r">Retention levels off after ten minutes.</h2>
   <div class="r cols" style="height:420px">
     <div class="col"><div class="cv">26.4%</div><div class="cb" style="height:76%"></div>
       <div class="cl">Under 10 min<b>12 videos</b></div></div>
@@ -315,16 +307,13 @@ const SLIDES = [
       <div class="cl">10 to 20 min<b>19 videos</b></div></div>
     <div class="col"><div class="cv">18.1%</div><div class="cb" style="height:52.1%"></div>
       <div class="cl">20 to 40 min<b>5 videos</b></div></div>
-    <div class="col void"><div class="cv">3.2%</div><div class="cb" style="height:9.2%"></div>
-      <div class="cl">Over 40 min<b>6 videos, 5 livestreams</b></div></div>
-    <div class="sep"></div>
-    <div class="col fix"><div class="cv">19.2%</div><div class="cb" style="height:55.3%"></div>
-      <div class="cl">Over 40 min<b>recalculated, 1 video</b></div></div>
+    <div class="col"><div class="cv">19.2%</div><div class="cb" style="height:55.3%"></div>
+      <div class="cl">Over 40 min<b>1 video</b></div></div>
   </div>
   <div class="r callout">
     <div class="big">19.2%</div>
-    <div class="t">Your one edited video over forty minutes. The bucket beside it read 3.2% because
-    five livestreams were averaged into it. Livestream retention is its own measurement.</div>
+    <div class="t">Your one video over forty minutes. The twenty-to-forty band sits at 18.1% and
+    ten-to-twenty at 20.5%, so past ten minutes the length stops being the thing that decides this.</div>
   </div>
 </section>`,
 
@@ -374,11 +363,11 @@ const SLIDES = [
 
 `<section class="slide">
   <div class="r kicker">Finding 06 &nbsp;/&nbsp; Search demand</div>
-  <h2 class="r">The middle video gets 530 views. This lane gets 4,285 searches a month.</h2>
+  <h2 class="r">The middle video gets 710 views. This lane gets 4,285 searches a month.</h2>
   <div class="r chart" style="margin-top:var(--s4);flex:none">
     <div class="row"><div class="k">Your median video</div>
-      <div class="track"><div class="bar"><div class="fill" style="width:12.4%"></div></div></div>
-      <div class="v">530</div></div>
+      <div class="track"><div class="bar"><div class="fill" style="width:16.6%"></div></div></div>
+      <div class="v">710</div></div>
     <div class="row hot"><div class="k">"forgotten cartoons"</div>
       <div class="track"><div class="bar"><div class="fill hot" style="width:100%"></div></div></div>
       <div class="v">4,285</div></div>
@@ -405,7 +394,7 @@ const SLIDES = [
 
 `<section class="slide">
   <div class="r kicker">Finding 08 &nbsp;/&nbsp; Peer proof at your scale</div>
-  <h2 class="r">Your best video outran all four of them.</h2>
+  <h2 class="r">Your best video outran three of the four.</h2>
   <table class="r">
     <tr><th>Channel</th><th>Subs</th><th>Typical video</th><th>Best result</th><th>Multiple</th></tr>
     <tr><td class="k">Pop Culture Pedestal</td><td>4,700</td><td>338</td>
@@ -416,15 +405,15 @@ const SLIDES = [
       <td>141,980<small>Who's The Dumbest Character?</small></td><td class="win">29.3x</td></tr>
     <tr><td class="k">47Cartoonguy</td><td>10,700</td><td>2,424</td>
       <td>164,905<small>Funtastic Legacy of Hanna-Barbera</small></td><td class="win">68.0x</td></tr>
-    <tr class="hi"><td class="k">Yugi Jo</td><td>1,570</td><td>530</td>
-      <td>62,889<small>Sonic Underground ending</small></td><td class="win">118.7x</td></tr>
+    <tr class="hi"><td class="k">Yugi Jo</td><td>1,570</td><td>710</td>
+      <td>62,889<small>Sonic Underground ending</small></td><td class="win">88.6x</td></tr>
   </table>
   <div class="r small" style="margin-top:var(--s5)">The 155,475 figure this slide used to lead with
   came from a channel with 893,000 subscribers, where it was a routine result.</div>
   <div class="r callout">
-    <div class="big">118.7x</div>
-    <div class="t">Your Sonic Underground video, measured against your own 530-view median. It
-    outran every peer here. The difference is that they land a second one.</div>
+    <div class="big">88.6x</div>
+    <div class="t">Your Sonic Underground video, measured against your own 710-view median. It
+    outran three of the four peers. The difference is that they land a second one.</div>
   </div>
 </section>`,
 
@@ -448,7 +437,7 @@ const SLIDES = [
     <div class="panel">
       <div class="tag">Stop</div>
       <ul>
-        <li><b>Livestreams</b><span>2.1% retention across four</span></li>
+        <li><b>Livestreams</b><span>Five of them earned 559 views between them</span></li>
         <li><b>"Ending explained" videos</b><span>Dominated by mass-produced channels in other languages</span></li>
         <li><b>Picking a show for obscurity alone</b><span>A forgotten-cartoon retrospective on a 368-sub channel got 79 views</span></li>
         <li><b>"Why X" essays</b><span>People click the premise and leave</span></li>
@@ -459,9 +448,9 @@ const SLIDES = [
 
 `<section class="slide statement">
   <div class="r kicker">Where this lands</div>
-  <h2 class="r">Eight times the median, on purpose, instead of one Sonic by accident.</h2>
+  <h2 class="r">Six times the median, on purpose, instead of one Sonic by accident.</h2>
   <div class="r rule"></div>
-  <div class="r lede">The honest size of it: the difference between 530 views and roughly 4,000,
+  <div class="r lede">The honest size of it: the difference between 710 views and roughly 4,000,
   every time, in the lane with the lowest competition measured on the channel. Pick a specific
   unclaimed cartoon with a real angle. Check it against the posted list and verify the search
   demand. Then write it to the voice rules and package it hard.</div>
